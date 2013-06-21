@@ -182,5 +182,28 @@ TARGET_HAL_PATH := hardware/samsung/exynos4/hal
 TARGET_OMX_PATH := hardware/samsung/exynos/multimedia/openmax
 $(call inherit-product, hardware/samsung/exynos4210.mk)
 
+#STweaks
+PRODUCT_COPY_FILES += \
+$(COMMON_PATH)/stweaks/STweaks.apk:root/res/STweaks.apk \
+$(COMMON_PATH)/stweaks/uci.sh:root/res/uci.sh \
+$(COMMON_PATH)/stweaks/update.url:root/res/update.url \
+$(COMMON_PATH)/stweaks/customconfig/customconfig.xml:root/res/customconfig/customconfig.xml \
+$(COMMON_PATH)/stweaks/customconfig-helper:root/res/customronfig/customconfig-helper \
+$(COMMON_PATH)/stweaks/customconfig/default.profile:root/res/customconfig/default.profile \
+$(COMMON_PATH)/stweaks/customconfig/actions/bln_effect:root/res/customconfig/actions/bln_effect \
+$(COMMON_PATH)/stweaks/customconfig/actions/cfs-tweaks:root/res/customconfig/actions/cfs-tweaks \
+$(COMMON_PATH)/stweaks/customconfig/actions/efs-backup:root/res/customconfig/actions/efs-backup \
+$(COMMON_PATH)/stweaks/customconfig/actions/generic:root/res/customconfig/actions/generic \
+$(COMMON_PATH)/stweaks/customconfig/actions/generic01:root/res/customconfig/actions/generic01 \
+$(COMMON_PATH)/stweaks/customconfig/actions/generickmem:root/res/customconfig/actions/generickmem \
+$(COMMON_PATH)/stweaks/customconfig/actions/generickmem01:root/res/customconfig/actions/generickmem01 \
+$(COMMON_PATH)/stweaks/customconfig/actions/overclock:root/res/customconfig/actions/overclock \
+$(COMMON_PATH)/stweaks/customconfig/actions/reset-fuelgauge:root/res/customconfig/actions/reset-fuelgauge \
+$(COMMON_PATH)/stweaks/customconfig/actions/schedfeat:root/res/customconfig/actions/schedfeat \
+$(COMMON_PATH)/stweaks/customconfig/actions/secondcore:root/res/customconfig/actions/secondcore \
+$(COMMON_PATH)/stweaks/customconfig/actions/test-bln:root/res/customconfig/actions/test-bln \
+$(COMMON_PATH)/stweaks/customconfig/actions/usb-mode:root/res/customconfig/actions/usb-mode \
+$(COMMON_PATH)/stweaks/customconfig/actions/zram:root/res/customconfig/actions/zram \
+
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/galaxys2-common/common-vendor.mk

@@ -1,0 +1,249 @@
+<settingsRoot>
+  <settingsTab name="CPU">
+    <settingsPane description="These settings control CFS (Complete Fair Scheduler) Task Scheduler Settings" name="CFS Settings">
+      <checkbox description="Disabling GENTLE_FAIR_SLEEPERS may give you better UI responsiveness." name="GENTLE_FAIR_SLEEPERS" action="schedfeat GENTLE_FAIR_SLEEPERS" label="GENTLE_FAIR_SLEEPERS"/>
+    </settingsPane>
+
+    <settingsPane description="" 
+		name="CPU Idle and Power Settings">
+      <spinner description="Sets the CPU Idle Mode. AFTR+LPA is the default and best for the battery life but if you have problems try Idle+LPA." name="CPU Idle Mode" action="generic /sys/module/cpuidle_exynos4/parameters/enable_mask">
+             <spinnerItem name="Idle + LPA" value="2"/> 
+             <spinnerItem name="AFTR + LPA (default)" value="3"/> 
+             <spinnerItem name="AFTR only" value="1"/> 
+             <spinnerItem name="Idle only" value="0"/> 
+      </spinner>
+      <spinner description="Sets the smooth scaling level which prevents ondemand based governors to jump directly to maximum frequency with load spikes. This setting will only change the behavior of ondemand and pegasusq governors." name="Smooth Scaling Level" action="generickmem smooth_level 0 int">
+             <spinnerItem name="Disabled" value="0"/> 
+             <spinnerItem name="1200MHz" value="4"/> 
+             <spinnerItem name="1000MHz" value="6"/> 
+             <spinnerItem name="800MHz (default)" value="8"/> 
+      </spinner>
+       <spinner description="Sets the number of CPUs to be used in hotplugging (only for PegasusQ)" name="Max CPU Lock" action="generic /sys/devices/system/cpu/cpufreq/pegasusq/max_cpu_lock">
+             <spinnerItem name="Dual core mode" value="2"/> 
+             <spinnerItem name="Single core mode" value="1"/> 
+       </spinner>
+    </settingsPane>
+
+    <settingsPane description=""
+		name="CPU Undervolting">
+      <spinner description="Sets the CPU undervolting value which will be applied during boot time only. It will not have any effect until you restart your device. Remember: if you change this value and your device doesn't boot you will have to reset extweaks settings using CWM recovery. This value will be applied to all CPU steps before any script or app execution. If you use any script or voltage control app this setting may be overriden by those." name="CPU Undervolting" action="generic /tmp/cpu_undervolting">
+             <spinnerItem name="No Undervolting" value="0"/> 
+             <spinnerItem name=" -25 mV" value="-25"/> 
+             <spinnerItem name=" -50 mV" value="-50"/> 
+             <spinnerItem name=" -75 mV" value="-75"/> 
+             <spinnerItem name="-100 mV" value="-100"/> 
+      </spinner>
+    </settingsPane>
+
+    <settingsPane description=""
+		name="CPU Scaling Settings">
+       <spinner description="This will set the default CPU governor. Default CPU governor will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default CPU Governor" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor">
+             <spinnerItem name="pegasusq" value="pegasusq"/> 
+             <spinnerItem name="lulzactiveq" value="lulzactiveq"/> 
+             <spinnerItem name="hotplug" value="hotplug"/> 
+             <spinnerItem name="ondemand" value="ondemand"/> 
+             <spinnerItem name="conservative" value="conservative"/> 
+       </spinner>
+       <seekBar description="Scaling maximum frequency (Samsung default: 1200000)"
+                name="scaling_max_freq" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq" unit=" kHz" min="800000" reversed="false" step="100000" max="1600000"/>
+       <seekBar description="Scaling minimum frequency (Samsung default: 200000)"
+                name="scaling_min_freq" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq" unit=" kHz" min="100000" reversed="false" step="100000" max="500000"/>
+    </settingsPane>
+  </settingsTab>
+
+  <settingsTab name="GPU">
+    <settingsPane description="GPU Frequency Settings. Defaults frequencies are 100, 133, 160, 200 and 267. Voltage defaults are 900mV, 950mV, 1000mV and 1050mV." name="GPUFreq">
+       <checkbox description="Enabling VPLL mode may be unstable on some devices so do not complain if your device crash or burn. If you do not use VPLL Mode some frequency steps will be unavailable." name="VPLL Mode" action="generic01 /sys/module/mali/parameters/mali_use_vpll" label="VPLL Mode"/>
+      <spinner description="Changes the first GPU frequency step" name="GPU Freq Step1" action="gpu-freq 1">
+             <spinnerItem name="267MHz" value="267"/> 
+             <spinnerItem name="200MHz" value="200"/> 
+             <spinnerItem name="160MHz" value="160"/> 
+             <spinnerItem name="108MHz" value="108"/> 
+             <spinnerItem name="66MHz" value="66"/> 
+             <spinnerItem name="54MHz" value="54"/> 
+      </spinner>
+      <spinner description="Changes the second GPU frequency step" name="GPU Freq Step2" action="gpu-freq 2">
+             <spinnerItem name="330MHz" value="330"/> 
+             <spinnerItem name="267MHz" value="267"/> 
+             <spinnerItem name="200MHz" value="200"/> 
+             <spinnerItem name="160MHz" value="160"/> 
+             <spinnerItem name="108MHz" value="108"/> 
+             <spinnerItem name="66MHz" value="66"/> 
+      </spinner>
+      <spinner description="Changes the third GPU frequency step" name="GPU Freq Step3" action="gpu-freq 3">
+             <spinnerItem name="400MHz" value="400"/> 
+             <spinnerItem name="330MHz" value="330"/> 
+             <spinnerItem name="267MHz" value="267"/> 
+             <spinnerItem name="200MHz" value="200"/> 
+             <spinnerItem name="160MHz" value="160"/> 
+             <spinnerItem name="108MHz" value="108"/> 
+      </spinner>
+      <spinner description="Changes the fourth GPU frequency step" name="GPU Freq Step4" action="gpu-freq 4">
+             <spinnerItem name="520MHz" value="520"/> 
+             <spinnerItem name="440MHz" value="440"/> 
+             <spinnerItem name="400MHz" value="400"/> 
+             <spinnerItem name="330MHz" value="330"/> 
+             <spinnerItem name="267MHz" value="267"/> 
+             <spinnerItem name="200MHz" value="200"/> 
+             <spinnerItem name="160MHz" value="160"/> 
+      </spinner>
+      <spinner description="Changes the fifth GPU frequency step" name="GPU Freq Step5" action="gpu-freq 5">
+             <spinnerItem name="520MHz" value="520"/> 
+             <spinnerItem name="440MHz" value="440"/> 
+             <spinnerItem name="400MHz" value="400"/> 
+             <spinnerItem name="330MHz" value="330"/> 
+             <spinnerItem name="267MHz" value="267"/> 
+             <spinnerItem name="200MHz" value="200"/> 
+      </spinner>
+    </settingsPane>
+
+    <settingsPane description="GPU Voltage Levels: The defaults are 900, 950, 950, 1000 and 1050." name="GPU Voltage Levels">
+      <seekBar description="GPU Voltage for the first step" 
+		name="GPU Voltage Level1" action="gpu-voltage 1" unit="mV" min="800" reversed="false" step="50" max="1400"/>
+      <seekBar description="GPU Voltage for the second step" 
+		name="GPU Voltage Level2" action="gpu-voltage 2" unit="mV" min="800" reversed="false" step="50" max="1400"/>
+      <seekBar description="GPU Voltage for the third step" 
+		name="GPU Voltage Level3" action="gpu-voltage 3" unit="mV" min="800" reversed="false" step="50" max="1400"/>
+      <seekBar description="GPU Voltage for the fourth step" 
+		name="GPU Voltage Level4" action="gpu-voltage 4" unit="mV" min="800" reversed="false" step="50" max="1400"/>
+      <seekBar description="GPU Voltage for the fifth step" 
+		name="GPU Voltage Level5" action="gpu-voltage 5" unit="mV" min="800" reversed="false" step="50" max="1400"/>
+    </settingsPane>
+
+    <settingsPane description="GPU load thresholds to change between frequency steps." name="GPU Thresholds">
+      <seekBar description="GPU threshold to jump up from first to second step" 
+		name="GPU Threshold 1-UP" action="gpu-thresh 1UP" unit="%" min="0" reversed="false" step="5" max="100"/>
+      <seekBar description="GPU threshold to jump down from second to first step" 
+		name="GPU Threshold 2-DOWN" action="gpu-thresh 2DOWN" unit="%" min="0" reversed="false" step="5" max="100"/>
+      <seekBar description="GPU threshold to jump up from second to third step" 
+		name="GPU Threshold 2-UP" action="gpu-thresh 2UP" unit="%" min="0" reversed="false" step="5" max="100"/>
+      <seekBar description="GPU threshold to jump down from third to second step" 
+		name="GPU Threshold 3-DOWN" action="gpu-thresh 3DOWN" unit="%" min="0" reversed="false" step="5" max="100"/>
+      <seekBar description="GPU threshold to jump up from third to fourth step" 
+		name="GPU Threshold 3-UP" action="gpu-thresh 3UP" unit="%" min="0" reversed="false" step="5" max="100"/>
+      <seekBar description="GPU threshold to jump down from fourth to third step" 
+		name="GPU Threshold 4-DOWN" action="gpu-thresh 4DOWN" unit="%" min="0" reversed="false" step="5" max="100"/>
+      <seekBar description="GPU threshold to jump up from fourth to fifth step" 
+		name="GPU Threshold 4-UP" action="gpu-thresh 4UP" unit="%" min="0" reversed="false" step="5" max="100"/>
+      <seekBar description="GPU threshold to jump down from fifth to fourth step" 
+		name="GPU Threshold 5-DOWN" action="gpu-thresh 5DOWN" unit="%" min="0" reversed="false" step="5" max="100"/>
+    </settingsPane>
+
+  </settingsTab>
+  <settingsTab name="Sound">
+    <settingsPane description="Headphone Amplification Settings" name="Headphone Amplification">
+      <seekBar description="Headphone Amplifier Level (0-3 which corresponds to 0-1.5-3-6dB)" 
+		name="Headphone Amplifier" action="eargasm_hp" unit="" min="0" reversed="false" step="1" max="3"/>
+      <seekBar description="Headphone Amplification Level"
+		name="Analog Headphone" action="sound_volume 1" unit="DB" min="-10" reversed="false" step="2" max="20"/>
+    </settingsPane>
+    <settingsPane description="Microphone Amplification Settings" name="Microphone Amplification">
+      <seekBar description="Microphone Amplifier Level (Used to increase or decrease volume during calls)" 
+		name="Microphone Amplifier" action="sound_volume 2" unit="" min="-20" reversed="false" step="2" max="20"/>
+    </settingsPane>
+    <settingsPane description="Speaker Amplification Settings" name="Speaker Amplification">
+      <seekBar description="Speaker Amplifier Level (Used in playing videos, calls with speakerphone, and so on)" 
+		name="Speaker Amplifier" action="sound_volume 3" unit="" min="-20" reversed="false" step="1" max="20"/>
+    </settingsPane>
+  </settingsTab>
+
+  <settingsTab name="Screen">
+    <settingsPane description="Brightness Curve settings which modify auto-brightness behavior." name="Brightness Curve">
+       <seekBar description="Sets touchscreen move sensitivity (vitalij value)." 
+		name="TouchMove Sensitivity" action="generic /sys/bus/i2c/devices/3-004a/mov_hysti" unit=" pixel" min="0" reversed="false" step="1" max="20"/>
+       <seekBar description="Setting min_bl higher will result in staying lowest brightness level for brighter conditions (default 30)" 
+		name="min_bl" action="generic /sys/class/misc/brightness_curve/min_bl" unit="" min="0" reversed="false" step="10" max="150"/>
+       <seekBar description="Minimum brightness level (default 0)" 
+		name="min_gamma" action="generic /sys/class/misc/brightness_curve/min_gamma" unit="" min="0" reversed="false" step="1" max="24"/>
+       <seekBar description="Maximum brightness level (default 24)" 
+		name="max_gamma" action="generic /sys/class/misc/brightness_curve/max_gamma" unit="" min="0" reversed="false" step="1" max="24"/>
+    </settingsPane>
+    <settingsPane description="Other Settings" name="Other Settings">
+       <seekBar description="User adjustable gamma shift." 
+		name="Gamma Shift" action="generic /sys/class/lcd/panel/user_gamma_adjust" unit="" min="-50" reversed="false" step="5" max="50"/>
+       <checkbox description="Enable slide2wake feature. Enabling this feature may decrease your battery life." name="Slide2Wake" action="generic01 /sys/devices/virtual/sec/sec_touchscreen/tsp_slide2wake" label="Slide2Wake"/>
+       <checkbox description="mDNIe sharpness tweaks from hardcore. Requires reboot to be effective." name="mDNIe Sharpness Tweaks" action="generic /tmp/mdniemod" label="mDNIe Sharpness Tweaks"/>
+       <checkbox description="Enable inverting the screen colors by quickly pressing Home button 4 times" name="mDNIe Negative Toggle" action="generic01 /sys/module/gpio_keys/parameters/mdnie_shortcut_enabled" label="mDNIe Negative Toggle"/>
+       <seekBar description="FB earlysuspend delay to run CRT animation when you turn the screen off." 
+		name="FB Earlysuspend Delay" action="generickmem fbearlysuspend_delay 0 int" unit=" ms" min="0" reversed="false" step="100" max="500"/>
+    </settingsPane>
+  </settingsTab>
+  <settingsTab name="BLN">
+    <settingsPane description="BackLightNotification and Touchkey related Settings" name="BackLightNotification">
+       <checkbox description="BackLightNotification" name="BLN" action="generic /sys/class/misc/notification/notification_enabled" label="BLN"/>
+       <spinner description="Notification timeout. 0: disabled" name="notification_timeout" action="generic /sys/class/misc/notification/notification_timeout">
+             <spinnerItem name="Never timeout" value="0"/> 
+             <spinnerItem name="1 minute" value="60000"/> 
+             <spinnerItem name="3 minutes" value="180000"/> 
+             <spinnerItem name="5 minutes" value="300000"/> 
+             <spinnerItem name="10 minutes" value="600000"/> 
+             <spinnerItem name="20 minutes" value="1200000"/> 
+             <spinnerItem name="30 minutes" value="1800000"/> 
+             <spinnerItem name="60 minutes" value="3600000"/> 
+             <spinnerItem name="120 minutes" value="7200000"/> 
+       </spinner>
+       <spinner description="This setting will set led behavior in BLN." name="BLN Effect" action="bln_effect">
+             <spinnerItem name="Steady" value="0"/> 
+             <spinnerItem name="Breathing" value="1"/> 
+             <spinnerItem name="Blinking" value="2"/> 
+       </spinner> 
+       <spinner description="Led timeout. Select 'Use ROM defaults' if your ROM already has led timeout support (requires restart). You will need to use this setting on Samsung ROMs if you want to use led fadeout effect." name="led_timeout" action="generic /sys/class/misc/notification/led_timeout_ms">
+             <spinnerItem name="Use ROM defaults (disabled)" value="-1"/> 
+             <spinnerItem name="No timeout" value="0"/> 
+             <spinnerItem name="1 sec" value="1000"/> 
+             <spinnerItem name="3 sec" value="3000"/> 
+             <spinnerItem name="6 sec" value="6000"/> 
+             <spinnerItem name="15 sec" value="15000"/> 
+             <spinnerItem name="30 sec" value="30000"/> 
+             <spinnerItem name="60 sec" value="60000"/> 
+       </spinner>
+       <checkbox description="BLN Without Wakelock. You cannot use blinking or breathing effects together with this option. Enabling this will let the CPU sleep during BLN and save battery." name="BLNWW" action="generic /sys/class/misc/notification/blnww" label="BLNWW"/>
+       <checkbox description="Led fadeout effect. If you are on a Samsung ROM, you need to set touchkey leds to always on or always off and use led timeout in ExTweaks." name="led-fadeout" action="generic /sys/class/misc/notification/led_fadeout" label="led-fadeout"/>
+       <checkbox description="Selecting this will activate turning touckey leds on when you touch the screen (only when led timeout is enabled)." name="Leds on with touch" action="generic /sys/class/misc/notification/led_on_touch" label="led-on-touch"/>
+       <button description="Use this button to test bln. BLN will be active after you turn the screen off." name="Test BLN" action="test-bln" label="Test BLN"/>
+       <seekBar description="Controls touchpad led voltage level (default: 3000)" 
+		name="Led Voltage Level" action="generic /sys/devices/virtual/sec/sec_touchkey/touchkey_brightness" unit=" mV" min="2500" reversed="false" step="50" max="3300"/>
+       <checkbox description="Automatic touchpad led voltage level. If this one is checked touchpad led voltage level will be ignored." name="Auto Led Voltage" action="generic /sys/class/misc/notification/dyn_brightness" label="Auto Led Voltage"/>
+    </settingsPane>
+  </settingsTab>
+  <settingsTab name="Misc">
+    <settingsPane description="Misc Settings" name="Misc Settings">
+      <checkbox description="Enable or Disable Android Logger (needs reboot)" name="Android Logger" action="generic /tmp/logger" label="Android Logger"/>
+      <spinner description="This will set the default I/O scheduler. Default I/O scheduler will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default I/O Scheduler" action="generic /sys/block/mmcblk0/queue/scheduler">
+             <spinnerItem name="sio" value="sio"/> 
+             <spinnerItem name="noop" value="noop"/> 
+             <spinnerItem name="deadline" value="deadline"/> 
+             <spinnerItem name="vr" value="vr"/> 
+             <spinnerItem name="cfq" value="cfq"/> 
+      </spinner>
+      <spinner description="Charge current setting" name="Charge Current" action="chargecurrent">
+             <spinnerItem name="AC:650mA, Misc,USB:450mA (Stock)" value="1"/> 
+             <spinnerItem name="AC,Misc:650mA, USB:450mA" value="2"/> 
+             <spinnerItem name="All:650mA (risky for USB ports)" value="3"/> 
+      </spinner>
+      <spinner description="Change USB connection mode. Either leave it as default or force it to mass storage mode (you will see your sdcards as disks) or mtp" name="USB Mass Storage Mode" action="usb-mode">
+             <spinnerItem name="Default" value="default"/> 
+             <spinnerItem name="Force Mass Storage Mode" value="mass_storage-adb"/> 
+             <spinnerItem name="Force MTP Mode" value="mtp-adb"/> 
+      </spinner>
+      <checkbox description="If checked, BetterBatteryStatus will report discrete (non-overlapping) wakelock statistics." name="Discrete Wakelock Stats" action="generic01 /sys/module/wakelock/parameters/default_stats" label="Discrete Wakelock Stats"/>
+      <button description="If you think that the fuel gauge chip is behaving weird use this button to reset it. Give it a few hours after you reset the gauge. It may still show you funny values for those period, then the battery percentage should be fine." name="Reset Fuel-Gauge Chip" action="reset-fuelgauge" label="Reset Fuel-Gauge Chip"/>
+    </settingsPane>
+    <settingsPane description="Removing/Reinstalling root to support some apps which requires you not to have a rooted phone." name="Remove/Reinstall Root">
+      <button description="Removes su and Superuser.apk files from the system partition" name="Remove Root" action="remove-root" label="Remove Root"/>
+      <checkbox description="If checked, installs root on the next reboot." name="Auto-Install Root" action="generic /tmp/install_root" label="Auto-Install Root"/>
+    </settingsPane>
+  </settingsTab>
+  <settingsTab name="Dualboot">
+    <settingsPane description="Dual-Boot Settings. Warning: No confirmation will be asked for reboot buttons." name="Dual-Boot Settings">
+      <button description="Reboot into custom recovery which let you configure, clone or backup the 2ndROM" name="Reboot into Recovery" action="reboot-into 0" label="Reboot into 2ndROM Utils"/>
+      <button description="Reboot into 1stROM" name="Reboot into 1stROM" action="reboot-into 1" label="Reboot into 1stROM"/>
+      <button description="Reboot into 2ndROM" name="Reboot into 2ndROM" action="reboot-into 2" label="Reboot into 2ndROM"/>
+      <checkbox description="Check this if you don't want boot logo to be shown. If this options is checked boot logo will not be shown even if you have 2ndROM installed." name="No boot-logo" action="no-boot-logo" label="No boot-logo"/>
+      <spinner description="Default ROM to boot into. If you don't have 2ndROM installation 1stROM will be booted. If you press the home or volume-down buttons during the boot logo the alternative ROM will be booted, i.e. 1stROM will be booted if the default ROM selection is the 2ndROM." name="Default ROM" action="defaultrom">
+             <spinnerItem name="1stROM" value="0"/> 
+             <spinnerItem name="2ndROM" value="1"/> 
+      </spinner>
+    </settingsPane>
+  </settingsTab>
+</settingsRoot>
