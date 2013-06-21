@@ -188,7 +188,7 @@ $(COMMON_PATH)/stweaks/STweaks.apk:root/res/STweaks.apk \
 $(COMMON_PATH)/stweaks/uci.sh:root/res/uci.sh \
 $(COMMON_PATH)/stweaks/update.url:root/res/update.url \
 $(COMMON_PATH)/stweaks/customconfig/customconfig.xml:root/res/customconfig/customconfig.xml \
-$(COMMON_PATH)/stweaks/customconfig-helper:root/res/customronfig/customconfig-helper \
+$(COMMON_PATH)/stweaks/customconfig/customconfig-helper:root/res/customconfig/customconfig-helper \
 $(COMMON_PATH)/stweaks/customconfig/default.profile:root/res/customconfig/default.profile \
 $(COMMON_PATH)/stweaks/customconfig/actions/bln_effect:root/res/customconfig/actions/bln_effect \
 $(COMMON_PATH)/stweaks/customconfig/actions/cfs-tweaks:root/res/customconfig/actions/cfs-tweaks \
